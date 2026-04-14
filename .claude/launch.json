@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "brilhodomar",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8081", "--directory", "/Users/highlevel/brilodomarlimpezas"],
+      "port": 8081
+    }
+  ]
+}

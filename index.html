@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Brilho do Mar | S.O.S Jardim — Jardinagem Profissional em Portugal</title>
+    <meta name="description" content="Brilho do Mar - S.O.S Jardim: criação de jardins, sistemas de rega, poda, abate de árvores, tratamento de pragas e limpeza de terrenos em Portugal. Peça orçamento gratuito." />
+    <meta name="keywords" content="jardinagem Portugal, criação de jardins, sistemas de rega, poda de árvores, tratamento de pragas, limpeza de terrenos, manutenção de jardins, abate de árvores" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Brilho do Mar | S.O.S Jardim — Jardinagem Profissional em Portugal" />
+    <meta property="og:description" content="Especialistas em criação de jardins, sistemas de rega, poda, abate e limpeza de terrenos. Peça já o seu orçamento gratuito." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1200&q=80&auto=format" />
+    <meta property="og:url" content="https://brilhodomar.pt" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://brilhodomar.pt" />
+
+    <!-- Favicon (leaf emoji as SVG data URI) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- GSAP + ScrollTrigger + Lenis -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" defer></script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --green-950: #052e16;
+            --green-900: #14532d;
+            --green-800: #166534;
+            --green-700: #15803d;
+            --green-600: #16a34a;
+            --green-500: #22c55e;
+            --green-100: #dcfce7;
+            --green-50: #f0fdf4;
+            --sage-900: #2d3a2e;
+            --sage-700: #4a5a4b;
+            --sage-500: #6b7c6c;
+            --sage-300: #a8b5a9;
+            --sage-100: #e8ede8;
+            --sage-50: #f4f7f4;
+            --warm-900: #1c1917;
+            --warm-700: #44403c;
+            --warm-500: #78716c;
+            --warm-300: #d6d3d1;
+            --warm-100: #f5f5f4;
+            --warm-50: #fafaf9;
+            --white: #ffffff;
+            --section-py: clamp(4rem, 8vw, 7rem);
+            --container-px: clamp(1.25rem, 4vw, 3rem);
+            --container-max: 1200px;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--warm-700);
+            background: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--green-950);
+            line-height: 1.15;
+            font-weight: 800;
+        }
+
+        img { display: block; max-width: 100%; height: auto; }
+        a { text-decoration: none; color: inherit; }
+        button { cursor: pointer; border: none; font-family: inherit; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding-left: var(--container-px);
+            padding-right: var(--container-px);
+        }
+
+        .sr-only {
+            position: absolute; width: 1px; height: 1px;
+            padding: 0; margin: -1px; overflow: hidden;
+            clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* GSAP handles all animations — initial hidden state */
+        .gs-reveal { opacity: 0; visibility: hidden; }
+
+        /* Lenis smooth scroll */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+
+        /* Magnetic button effect */
+        .btn { will-change: transform; }
+
+        /* Parallax image containers */
+        .parallax-img { overflow: hidden; }
+        .parallax-img img { will-change: transform; }
+
+        /* Split text lines */
+        .split-line { overflow: hidden; display: block; }
+        .split-line-inner { display: block; }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700;
+            border-radius: 100px; transition: all 0.3s var(--ease-out); white-space: nowrap;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--green-800) 0%, var(--green-600) 100%);
+            color: var(--white); padding: 1rem 2.25rem; font-size: 1rem;
+            box-shadow: 0 4px 20px rgba(22, 101, 52, 0.3);
+        }
+        .btn-primary:hover { box-shadow: 0 8px 32px rgba(22, 101, 52, 0.45); transform: translateY(-2px); }
+        .btn-primary:active { transform: translateY(0); }
+        .btn-outline {
+            background: transparent; color: var(--green-800);
+            padding: 1rem 2.25rem; font-size: 1rem; border: 2px solid var(--green-800);
+        }
+        .btn-outline:hover { background: var(--green-50); border-color: var(--green-700); }
+        .btn-white {
+            background: var(--white); color: var(--green-900);
+            padding: 1rem 2.25rem; font-size: 1rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .btn-white:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.12); transform: translateY(-2px); }
+        .btn-whatsapp {
+            background: #25D366; color: var(--white);
+            padding: 1rem 2.25rem; font-size: 1rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+        }
+        .btn-whatsapp:hover { box-shadow: 0 8px 32px rgba(37, 211, 102, 0.45); transform: translateY(-2px); }
+        .btn-sm { padding: 0.75rem 1.5rem; font-size: 0.875rem; }
+        .btn-lg { padding: 1.125rem 2.75rem; font-size: 1.0625rem; }
+
+        /* ============================================
+           NAVIGATION
+           ============================================ */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+        .nav.scrolled { background: rgba(255, 255, 255, 0.95); box-shadow: 0 1px 20px rgba(0, 0, 0, 0.06); }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+        .nav-brand { display: flex; flex-direction: column; line-height: 1.1; }
+        .nav-brand-name { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.375rem; color: var(--green-900); letter-spacing: -0.02em; }
+        .nav-brand-sub { font-size: 0.6875rem; font-weight: 600; color: var(--sage-500); letter-spacing: 0.08em; text-transform: uppercase; }
+        .nav-links { display: flex; align-items: center; gap: 2rem; }
+        .nav-links a { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 0.9375rem; color: var(--warm-500); transition: color 0.2s ease; }
+        .nav-links a:hover { color: var(--green-800); }
+        .nav-cta { margin-left: 0.5rem; }
+        .nav-mobile-toggle { display: none; background: none; color: var(--green-900); padding: 0.5rem; }
+        .nav-mobile-toggle svg { width: 28px; height: 28px; }
+        .mobile-menu {
+            display: none; position: fixed; top: 76px; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
+            z-index: 99; padding: 2rem var(--container-px); flex-direction: column; gap: 0.5rem;
+        }
+        .mobile-menu.open { display: flex; }
+        .mobile-menu a { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 1.125rem; color: var(--warm-700); padding: 1rem 0; border-bottom: 1px solid var(--warm-100); display: block; }
+        .mobile-menu .btn { margin-top: 1rem; width: 100%; }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-cta { display: none; }
+            .nav-mobile-toggle { display: block; }
+        }
+
+        /* ============================================
+           HERO — com parallax
+           ============================================ */
+        .hero {
+            position: relative; min-height: 100vh; display: flex; align-items: center;
+            padding-top: 76px; overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; inset: 0; z-index: 0;
+            will-change: transform;
+            transform: translateZ(0);
+        }
+        .hero-bg img { width: 100%; height: 130%; object-fit: cover; will-change: transform; }
+        .hero-bg::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(5, 46, 22, 0.88) 0%, rgba(20, 83, 45, 0.75) 40%, rgba(21, 128, 61, 0.55) 100%);
+        }
+        .hero-content { position: relative; z-index: 2; padding: clamp(3rem, 8vw, 6rem) 0; max-width: 720px; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 100px;
+            padding: 0.5rem 1.25rem; font-size: 0.8125rem; font-weight: 600;
+            color: var(--green-100); letter-spacing: 0.02em; margin-bottom: 1.5rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+        .hero-badge svg { width: 16px; height: 16px; fill: currentColor; }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); color: var(--white); margin-bottom: 1.25rem; letter-spacing: -0.025em; animation: fadeInUp 0.8s var(--ease-out); }
+        .hero h1 span { color: var(--green-500); }
+        .hero-subtitle { font-size: clamp(1.0625rem, 2vw, 1.25rem); color: rgba(255, 255, 255, 0.85); max-width: 560px; line-height: 1.7; margin-bottom: 2.5rem; font-weight: 300; animation: fadeInUp 0.8s var(--ease-out) 0.1s both; }
+        .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; animation: fadeInUp 0.8s var(--ease-out) 0.2s both; }
+        .hero-trust { display: flex; align-items: center; gap: 1.5rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.15); animation: fadeInUp 0.8s var(--ease-out) 0.4s both; }
+        .hero-trust-item { display: flex; align-items: center; gap: 0.5rem; color: rgba(255, 255, 255, 0.8); font-size: 0.875rem; font-weight: 500; }
+        .hero-trust-item svg { width: 18px; height: 18px; color: var(--green-500); flex-shrink: 0; }
+        @media (max-width: 640px) { .hero-trust { flex-direction: column; align-items: flex-start; gap: 0.75rem; } }
+
+        /* ============================================
+           SECTION SHARED
+           ============================================ */
+        .section-header { text-align: center; max-width: 640px; margin: 0 auto 3.5rem; }
+        .section-label { display: inline-block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--green-700); margin-bottom: 0.75rem; }
+        .section-title { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 1rem; letter-spacing: -0.02em; }
+        .section-subtitle { font-size: 1.0625rem; color: var(--warm-500); line-height: 1.7; }
+
+        /* ============================================
+           SERVICES
+           ============================================ */
+        .services { padding: var(--section-py) 0; background: var(--white); }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .service-card { position: relative; border-radius: 1.25rem; overflow: hidden; background: var(--warm-50); border: 1px solid rgba(0,0,0,0.04); transition: all 0.4s var(--ease-out); }
+        .service-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); border-color: rgba(22,101,52,0.1); }
+        .service-card-img { position: relative; height: 220px; overflow: hidden; }
+        .service-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease-out); }
+        .service-card:hover .service-card-img img { transform: scale(1.05); }
+        .service-card-img::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.15), transparent); }
+        .service-card-icon { position: absolute; top: 1rem; left: 1rem; width: 48px; height: 48px; background: var(--white); border-radius: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(0,0,0,0.1); z-index: 2; }
+        .service-card-icon svg { width: 24px; height: 24px; color: var(--green-700); }
+        .service-card-body { padding: 1.5rem; }
+        .service-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+        .service-card p { font-size: 0.9375rem; color: var(--warm-500); line-height: 1.65; }
+        @media (max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .services-grid { grid-template-columns: 1fr; } }
+
+        /* ============================================
+           CTA BANNER (intermédio)
+           ============================================ */
+        .cta-banner {
+            padding: 3.5rem 0;
+            background: linear-gradient(135deg, var(--green-900), var(--green-700));
+            text-align: center;
+        }
+        .cta-banner h2 { color: var(--white); font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+        .cta-banner p { color: rgba(255,255,255,0.75); font-size: 1.0625rem; margin-bottom: 1.75rem; }
+        .cta-banner-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+
+        /* ============================================
+           ABOUT
+           ============================================ */
+        .about { padding: var(--section-py) 0; background: var(--sage-50); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .about-images { position: relative; }
+        .about-img-main { border-radius: 1.5rem; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.1); }
+        .about-img-main img { width: 100%; height: 440px; object-fit: cover; }
+        .about-img-accent { position: absolute; bottom: -2rem; right: -2rem; width: 200px; height: 200px; border-radius: 1.25rem; overflow: hidden; box-shadow: 0 16px 40px rgba(0,0,0,0.12); border: 4px solid var(--white); }
+        .about-img-accent img { width: 100%; height: 100%; object-fit: cover; }
+        .about-content { max-width: 540px; }
+        .about-content .section-label { text-align: left; }
+        .about-content h2 { font-size: clamp(1.875rem, 3.5vw, 2.5rem); margin-bottom: 1.5rem; letter-spacing: -0.02em; }
+        .about-text { font-size: 1rem; color: var(--warm-500); line-height: 1.75; margin-bottom: 2rem; }
+        .about-text p + p { margin-top: 1rem; }
+        .about-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; padding-top: 2rem; border-top: 1px solid var(--sage-300); }
+        .about-stat { text-align: center; }
+        .about-stat-value { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.75rem; font-weight: 800; color: var(--green-800); line-height: 1; margin-bottom: 0.375rem; }
+        .about-stat-label { font-size: 0.8125rem; color: var(--warm-500); font-weight: 500; }
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .about-img-accent { display: none; }
+            .about-img-main img { height: 300px; }
+        }
+
+        /* ============================================
+           DIFFERENTIALS
+           ============================================ */
+        .differentials { padding: var(--section-py) 0; background: var(--white); }
+        .diff-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+        .diff-card { text-align: center; padding: 2.5rem 1.5rem; border-radius: 1.25rem; background: var(--warm-50); border: 1px solid transparent; transition: all 0.3s var(--ease-out); }
+        .diff-card:hover { border-color: var(--green-100); background: var(--green-50); }
+        .diff-icon { width: 64px; height: 64px; margin: 0 auto 1.25rem; background: var(--green-50); border-radius: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s var(--ease-out); }
+        .diff-card:hover .diff-icon { background: var(--green-100); }
+        .diff-icon svg { width: 28px; height: 28px; color: var(--green-700); }
+        .diff-card h3 { font-size: 1.0625rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--green-950); }
+        .diff-card p { font-size: 0.875rem; color: var(--warm-500); line-height: 1.65; }
+        @media (max-width: 1024px) { .diff-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .diff-grid { grid-template-columns: 1fr; } }
+
+        /* ============================================
+           PORTFOLIO / GALLERY
+           ============================================ */
+        .portfolio { padding: var(--section-py) 0; background: var(--sage-50); }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        .portfolio-item {
+            position: relative; border-radius: 1rem; overflow: hidden;
+            aspect-ratio: 4/3; cursor: pointer;
+        }
+        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease-out); }
+        .portfolio-item:hover img { transform: scale(1.06); }
+        .portfolio-item-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(5,46,22,0.7) 0%, transparent 60%);
+            display: flex; align-items: flex-end; padding: 1.25rem;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .portfolio-item:hover .portfolio-item-overlay { opacity: 1; }
+        .portfolio-item-overlay span { color: var(--white); font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 0.9375rem; }
+        .portfolio-item:nth-child(1) { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; }
+        @media (max-width: 768px) {
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .portfolio-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+        }
+        @media (max-width: 480px) {
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .portfolio-item:nth-child(1) { grid-column: span 1; }
+        }
+
+        /* ============================================
+           TESTIMONIALS
+           ============================================ */
+        .testimonials { padding: var(--section-py) 0; background: var(--white); }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .testimonial-card {
+            padding: 2rem; border-radius: 1.25rem; background: var(--warm-50);
+            border: 1px solid rgba(0,0,0,0.04); transition: all 0.3s var(--ease-out);
+        }
+        .testimonial-card:hover { box-shadow: 0 12px 36px rgba(0,0,0,0.06); }
+        .testimonial-stars { display: flex; gap: 0.125rem; margin-bottom: 1rem; }
+        .testimonial-stars svg { width: 18px; height: 18px; color: #f59e0b; fill: #f59e0b; }
+        .testimonial-text { font-size: 0.9375rem; color: var(--warm-700); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
+        .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+        .testimonial-avatar {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--green-100); display: flex; align-items: center; justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1rem; color: var(--green-800);
+        }
+        .testimonial-info h4 { font-size: 0.9375rem; font-weight: 700; color: var(--green-950); line-height: 1.3; }
+        .testimonial-info p { font-size: 0.8125rem; color: var(--warm-500); }
+        @media (max-width: 768px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+        /* ============================================
+           PROCESS
+           ============================================ */
+        .process { padding: var(--section-py) 0; background: var(--green-950); color: var(--white); position: relative; overflow: hidden; }
+        .process::before { content: ''; position: absolute; top: -200px; right: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(34,197,94,0.08), transparent 70%); border-radius: 50%; }
+        .process .section-label { color: var(--green-500); }
+        .process .section-title { color: var(--white); }
+        .process .section-subtitle { color: rgba(255,255,255,0.6); }
+        .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; position: relative; }
+        .process-step { position: relative; padding: 2rem; border-radius: 1.25rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); transition: all 0.3s var(--ease-out); }
+        .process-step:hover { background: rgba(255,255,255,0.08); border-color: rgba(34,197,94,0.2); }
+        .process-step-number { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 3rem; font-weight: 800; color: rgba(34,197,94,0.2); line-height: 1; margin-bottom: 1rem; }
+        .process-step h3 { font-size: 1.125rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+        .process-step p { font-size: 0.875rem; color: rgba(255,255,255,0.55); line-height: 1.65; }
+        @media (max-width: 1024px) { .process-steps { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .process-steps { grid-template-columns: 1fr; } }
+
+        /* ============================================
+           CONTACT
+           ============================================ */
+        .contact { padding: var(--section-py) 0; background: var(--sage-50); }
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,0.08); }
+        .contact-info { background: linear-gradient(160deg, var(--green-900), var(--green-800)); padding: clamp(2.5rem, 5vw, 4rem); color: var(--white); display: flex; flex-direction: column; justify-content: center; }
+        .contact-info h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); color: var(--white); margin-bottom: 1rem; letter-spacing: -0.02em; }
+        .contact-info > p { color: rgba(255,255,255,0.75); font-size: 1rem; line-height: 1.7; margin-bottom: 2.5rem; }
+        .contact-details { display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2.5rem; }
+        .contact-detail { display: flex; align-items: center; gap: 1rem; }
+        .contact-detail-icon { width: 44px; height: 44px; background: rgba(255,255,255,0.12); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .contact-detail-icon svg { width: 20px; height: 20px; color: var(--green-500); }
+        .contact-detail-text { font-size: 0.9375rem; font-weight: 500; }
+        .contact-detail-text small { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.5); font-weight: 400; margin-bottom: 0.125rem; }
+        .contact-sos { padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.12); }
+        .contact-sos p { font-size: 0.8125rem; color: rgba(255,255,255,0.5); margin-bottom: 0.25rem; }
+        .contact-sos strong { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.125rem; font-weight: 700; color: var(--white); }
+        .contact-form { background: var(--white); padding: clamp(2.5rem, 5vw, 4rem); }
+        .contact-form h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .contact-form > p { font-size: 0.9375rem; color: var(--warm-500); margin-bottom: 2rem; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label { display: block; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8125rem; font-weight: 600; color: var(--warm-700); margin-bottom: 0.5rem; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 0.875rem 1rem; border: 1.5px solid var(--warm-300);
+            border-radius: 0.75rem; font-family: inherit; font-size: 0.9375rem;
+            color: var(--warm-900); background: var(--white); transition: border-color 0.2s ease; outline: none;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--green-600); box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+        }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: var(--warm-300); }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+
+        /* Custom select styling */
+        .form-group select {
+            width: 100%; padding: 0.875rem 2.5rem 0.875rem 1rem; border: 1.5px solid var(--warm-300);
+            border-radius: 0.75rem; font-family: inherit; font-size: 0.9375rem;
+            color: var(--warm-900); background: var(--white); outline: none;
+            -webkit-appearance: none; -moz-appearance: none; appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2378716c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 1rem center;
+            cursor: pointer; transition: border-color 0.2s ease;
+        }
+        .form-group select:invalid { color: var(--warm-300); }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+        .form-submit { margin-top: 0.5rem; }
+        .form-submit .btn { width: 100%; }
+        @media (max-width: 768px) { .contact-wrapper { grid-template-columns: 1fr; } }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer { background: var(--green-950); color: var(--white); padding: 3.5rem 0 2rem; }
+        .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .footer-brand-name { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.375rem; color: var(--white); margin-bottom: 0.25rem; }
+        .footer-brand-sub { font-size: 0.75rem; color: rgba(255,255,255,0.4); font-weight: 600; letter-spacing: 0.06em; margin-bottom: 1rem; }
+        .footer-desc { font-size: 0.875rem; color: rgba(255,255,255,0.5); line-height: 1.65; max-width: 320px; }
+        .footer-col h4 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.6); margin-bottom: 1.25rem; }
+        .footer-col ul { display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-col a { font-size: 0.875rem; color: rgba(255,255,255,0.5); transition: color 0.2s ease; }
+        .footer-col a:hover { color: var(--green-500); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; }
+        .footer-copy { font-size: 0.8125rem; color: rgba(255,255,255,0.3); }
+        .footer-email a { font-size: 0.8125rem; color: rgba(255,255,255,0.4); transition: color 0.2s ease; }
+        .footer-email a:hover { color: var(--green-500); }
+        @media (max-width: 768px) {
+            .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
+        }
+
+        /* Floating CTA mobile */
+        .floating-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; padding: 1rem var(--container-px); background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-top: 1px solid rgba(0,0,0,0.06); box-shadow: 0 -4px 20px rgba(0,0,0,0.06); }
+        .floating-cta .btn { width: 100%; }
+        @media (max-width: 768px) { .floating-cta { display: block; } .footer { padding-bottom: 5rem; } }
+    </style>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Brilho do Mar - S.O.S Jardim",
+        "description": "Empresa especializada em jardinagem, criação de jardins, sistemas de rega, poda, abate de árvores, tratamento de pragas e limpeza de terrenos em Portugal.",
+        "email": "brilhodomarlimpezas@gmail.com",
+        "telephone": "+351912345678",
+        "url": "https://brilhodomar.pt",
+        "areaServed": "Portugal",
+        "serviceType": ["Jardinagem", "Criação de jardins", "Sistemas de rega", "Poda de árvores", "Abate de árvores", "Tratamento de pragas", "Limpeza de terrenos"],
+        "address": { "@type": "PostalAddress", "addressCountry": "PT" }
+    }
+    </script>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="nav" id="nav">
+        <div class="container">
+            <nav class="nav-inner">
+                <a href="#" class="nav-brand" aria-label="Brilho do Mar">
+                    <span class="nav-brand-name">Brilho do Mar</span>
+                    <span class="nav-brand-sub">S.O.S Jardim</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#servicos">Serviços</a>
+                    <a href="#sobre">Sobre Nós</a>
+                    <a href="#processo">Como Trabalhamos</a>
+                    <a href="#contacto">Contacto</a>
+                </div>
+                <div class="nav-cta">
+                    <a href="#contacto" class="btn btn-primary btn-sm">Pedir Orçamento</a>
+                </div>
+                <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+                </button>
+            </nav>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#servicos" onclick="closeMobileMenu()">Serviços</a>
+            <a href="#sobre" onclick="closeMobileMenu()">Sobre Nós</a>
+            <a href="#processo" onclick="closeMobileMenu()">Como Trabalhamos</a>
+            <a href="#contacto" onclick="closeMobileMenu()">Contacto</a>
+            <a href="#contacto" class="btn btn-primary" onclick="closeMobileMenu()">Pedir Orçamento</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero" id="hero">
+            <div class="hero-bg" id="heroBg">
+                <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=1600&q=80&auto=format" alt="Jardim profissional com relva verde e paisagismo cuidado" loading="eager" />
+            </div>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+                        Especialistas em jardinagem em Portugal
+                    </div>
+                    <h1>O seu jardim merece <span>cuidado profissional</span></h1>
+                    <p class="hero-subtitle">Criamos, tratamos e transformamos espaços exteriores com rigor técnico e dedicação. Da criação de jardins à limpeza de terrenos, entregamos resultados que se veem.</p>
+                    <div class="hero-actions">
+                        <a href="#contacto" class="btn btn-primary btn-lg">Pedir Orçamento Gratuito</a>
+                        <a href="https://wa.me/351912345678?text=Olá, gostaria de pedir um orçamento." class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            WhatsApp
+                        </a>
+                    </div>
+                    <div class="hero-trust">
+                        <div class="hero-trust-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+                            Orçamento sem compromisso
+                        </div>
+                        <div class="hero-trust-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+                            Equipa técnica qualificada
+                        </div>
+                        <div class="hero-trust-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+                            Serviço em todo o país
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="services" id="servicos">
+            <div class="container">
+                <div class="section-header gs-reveal">
+                    <span class="section-label">Os Nossos Serviços</span>
+                    <h2 class="section-title">Soluções completas para o seu espaço exterior</h2>
+                    <p class="section-subtitle">Da conceção à manutenção, oferecemos serviços técnicos de jardinagem com foco na qualidade e no resultado final.</p>
+                </div>
+                <div class="services-grid stagger-children">
+                    <article class="service-card gs-reveal">
+                        <div class="service-card-img">
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80&auto=format" alt="Criação de jardim residencial com plantas verdes e design paisagístico" loading="lazy" />
+                            <div class="service-card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" /></svg></div>
+                        </div>
+                        <div class="service-card-body">
+                            <h3>Criação de Jardins</h3>
+                            <p>Planeamento e execução de jardins personalizados. Analisamos o terreno, o clima e as suas preferências para criar espaços verdes funcionais e esteticamente cuidados.</p>
+                        </div>
+                    </article>
+                    <article class="service-card gs-reveal">
+                        <div class="service-card-img">
+                            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80&auto=format" alt="Sistema de rega automático a funcionar num jardim verde" loading="lazy" />
+                            <div class="service-card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg></div>
+                        </div>
+                        <div class="service-card-body">
+                            <h3>Sistemas de Rega</h3>
+                            <p>Instalação e manutenção de sistemas de rega automática. Garantimos uma distribuição de água eficiente, adaptada a cada tipo de planta e terreno.</p>
+                        </div>
+                    </article>
+                    <article class="service-card gs-reveal">
+                        <div class="service-card-img">
+                            <img src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=600&q=80&auto=format" alt="Plantas saudáveis e bem cuidadas num jardim" loading="lazy" />
+                            <div class="service-card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" /></svg></div>
+                        </div>
+                        <div class="service-card-body">
+                            <h3>Tratamento de Pragas e Doenças</h3>
+                            <p>Diagnóstico preciso e intervenção técnica para combater pragas e doenças. Aplicamos tratamentos biológicos e fitossanitários adequados a cada situação.</p>
+                        </div>
+                    </article>
+                    <article class="service-card gs-reveal">
+                        <div class="service-card-img">
+                            <img src="https://images.unsplash.com/photo-1599629954294-14df9ec57ea4?w=600&q=80&auto=format" alt="Poda profissional de sebe verde" loading="lazy" />
+                            <div class="service-card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.848 8.25l1.536.887M7.848 8.25a3 3 0 11-5.196-3 3 3 0 015.196 3zm1.536.887a2.165 2.165 0 011.083 1.839c.005.351.054.695.14 1.024M9.384 9.137l2.077 1.199M7.848 15.75l1.536-.887m-1.536.887a3 3 0 11-5.196 3 3 3 0 015.196-3zm1.536-.887a2.165 2.165 0 001.083-1.838c.005-.352.054-.696.14-1.025m-1.223 2.863l2.077-1.199m0-3.328a4.323 4.323 0 012.068-1.379l5.325-1.628a4.5 4.5 0 012.48-.044l.803.215-7.794 4.5m-2.882-1.664A4.331 4.331 0 0010.607 12m3.736 0l7.794 4.5-.802.215a4.5 4.5 0 01-2.48-.043l-5.326-1.629a4.324 4.324 0 01-2.068-1.379M14.343 12l-2.882 1.664" /></svg></div>
+                        </div>
+                        <div class="service-card-body">
+                            <h3>Poda</h3>
+                            <p>Poda de formação, manutenção e rejuvenescimento de árvores, arbustos e sebes. Trabalhamos com técnica e equipamento adequado para garantir a saúde da planta.</p>
+                        </div>
+                    </article>
+                    <article class="service-card gs-reveal">
+                        <div class="service-card-img">
+                            <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=600&q=80&auto=format" alt="Árvores altas numa floresta bem gerida" loading="lazy" />
+                            <div class="service-card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg></div>
+                        </div>
+                        <div class="service-card-body">
+                            <h3>Abate de Árvores</h3>
+                            <p>Remoção segura e controlada de árvores em risco, doentes ou mal posicionadas. Cumprimos as normas de segurança e fazemos a limpeza completa do local.</p>
+                        </div>
+                    </article>
+                    <article class="service-card gs-reveal">
+                        <div class="service-card-img">
+                            <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80&auto=format" alt="Terreno limpo e bem cuidado ao ar livre" loading="lazy" />
+                            <div class="service-card-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg></div>
+                        </div>
+                        <div class="service-card-body">
+                            <h3>Limpeza de Terrenos</h3>
+                            <p>Desmatação, limpeza de mato e preparação de terrenos urbanos ou rurais. Serviço essencial para prevenção de incêndios e valorização da propriedade.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA BANNER INTERMÉDIO -->
+        <section class="cta-banner">
+            <div class="container gs-reveal">
+                <h2>Precisa de um serviço de jardinagem profissional?</h2>
+                <p>Diga-nos o que precisa e receba um orçamento gratuito, sem compromisso.</p>
+                <div class="cta-banner-actions">
+                    <a href="#contacto" class="btn btn-white btn-lg">Pedir Orçamento Gratuito</a>
+                    <a href="https://wa.me/351912345678?text=Olá, gostaria de pedir um orçamento." class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Falar por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section class="about" id="sobre">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-images gs-reveal">
+                        <div class="about-img-main parallax-img">
+                            <img src="https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=800&q=80&auto=format" alt="Profissional de jardinagem a trabalhar num espaço verde" loading="lazy" />
+                        </div>
+                        <div class="about-img-accent">
+                            <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=400&q=80&auto=format" alt="Detalhe de planta verde saudável" loading="lazy" />
+                        </div>
+                    </div>
+                    <div class="about-content gs-reveal">
+                        <span class="section-label">Sobre a Brilho do Mar</span>
+                        <h2>Conhecimento técnico ao serviço do seu jardim</h2>
+                        <div class="about-text">
+                            <p>A <strong>Brilho do Mar</strong> nasceu da experiência no terreno e do compromisso em oferecer um serviço de jardinagem sério e fiável em Portugal. Não prometemos milagres — entregamos resultados.</p>
+                            <p>Através da marca <strong>S.O.S Jardim</strong>, respondemos com rapidez e eficácia a qualquer necessidade do seu espaço exterior: desde intervenções de urgência até projetos de criação completa.</p>
+                            <p>Cada trabalho começa com um diagnóstico presencial. Avaliamos o terreno, o tipo de solo e as condições climáticas antes de propor qualquer solução. Esta abordagem técnica permite-nos garantir resultados duradouros e clientes satisfeitos.</p>
+                        </div>
+                        <div class="about-stats">
+                            <div class="about-stat"><div class="about-stat-value">6</div><div class="about-stat-label">Serviços especializados</div></div>
+                            <div class="about-stat"><div class="about-stat-value">100%</div><div class="about-stat-label">Foco no cliente</div></div>
+                            <div class="about-stat"><div class="about-stat-value">PT</div><div class="about-stat-label">Cobertura nacional</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIFFERENTIALS -->
+        <section class="differentials" id="diferenciais">
+            <div class="container">
+                <div class="section-header gs-reveal">
+                    <span class="section-label">Porquê escolher-nos</span>
+                    <h2 class="section-title">O que nos distingue</h2>
+                    <p class="section-subtitle">Trabalhamos com método, rigor e transparência. Cada detalhe conta para entregar um resultado à altura das suas expectativas.</p>
+                </div>
+                <div class="diff-grid stagger-children">
+                    <div class="diff-card gs-reveal">
+                        <div class="diff-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg></div>
+                        <h3>Equipa Profissional</h3>
+                        <p>Técnicos com experiência prática e formação específica. Trabalhamos fardados, com equipamento profissional e pontualidade.</p>
+                    </div>
+                    <div class="diff-card gs-reveal">
+                        <div class="diff-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" /></svg></div>
+                        <h3>Soluções à Medida</h3>
+                        <p>Não trabalhamos com pacotes genéricos. Cada orçamento é feito com base numa visita presencial e avaliação real das necessidades.</p>
+                    </div>
+                    <div class="diff-card gs-reveal">
+                        <div class="diff-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>
+                        <h3>Resposta Rápida</h3>
+                        <p>Respondemos a todos os pedidos de orçamento com agilidade. Valorizamos o seu tempo tanto quanto valorizamos o seu jardim.</p>
+                    </div>
+                    <div class="diff-card gs-reveal">
+                        <div class="diff-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" /></svg></div>
+                        <h3>Qualidade Visível</h3>
+                        <p>O nosso trabalho fala por si. Deixamos cada espaço limpo, organizado e com um acabamento que faz a diferença.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO / GALLERY -->
+        <section class="portfolio" id="portfolio">
+            <div class="container">
+                <div class="section-header gs-reveal">
+                    <span class="section-label">Os Nossos Trabalhos</span>
+                    <h2 class="section-title">Resultados que falam por si</h2>
+                    <p class="section-subtitle">Cada projeto é um reflexo do nosso empenho. Veja alguns dos espaços que já transformámos.</p>
+                </div>
+                <div class="portfolio-grid stagger-children">
+                    <div class="portfolio-item gs-reveal">
+                        <img src="https://images.unsplash.com/photo-1598902108854-d1446f684c3f?w=800&q=80&auto=format" alt="Jardim residencial com relva verde, canteiros e caminho de pedra" loading="lazy" />
+                        <div class="portfolio-item-overlay"><span>Criação de jardim residencial</span></div>
+                    </div>
+                    <div class="portfolio-item gs-reveal">
+                        <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=600&q=80&auto=format" alt="Sebe de buxo perfeitamente podada" loading="lazy" />
+                        <div class="portfolio-item-overlay"><span>Poda de sebes ornamentais</span></div>
+                    </div>
+                    <div class="portfolio-item gs-reveal">
+                        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80&auto=format" alt="Sistema de rega automática instalado" loading="lazy" />
+                        <div class="portfolio-item-overlay"><span>Sistema de rega automática</span></div>
+                    </div>
+                    <div class="portfolio-item gs-reveal">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80&auto=format" alt="Terreno limpo e preparado" loading="lazy" />
+                        <div class="portfolio-item-overlay"><span>Limpeza de terreno rural</span></div>
+                    </div>
+                    <div class="portfolio-item gs-reveal">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80&auto=format" alt="Jardim com plantas ornamentais" loading="lazy" />
+                        <div class="portfolio-item-overlay"><span>Manutenção de espaço verde</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="testimonials" id="testemunhos">
+            <div class="container">
+                <div class="section-header gs-reveal">
+                    <span class="section-label">Testemunhos</span>
+                    <h2 class="section-title">O que dizem os nossos clientes</h2>
+                    <p class="section-subtitle">A satisfação de quem confia no nosso trabalho é a nossa melhor referência.</p>
+                </div>
+                <div class="testimonials-grid stagger-children">
+                    <div class="testimonial-card gs-reveal">
+                        <div class="testimonial-stars">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        </div>
+                        <p class="testimonial-text">"Contratámos a Brilho do Mar para a criação do nosso jardim e ficámos impressionados com o profissionalismo. O resultado superou as expectativas e o espaço ficou completamente diferente."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">MF</div>
+                            <div class="testimonial-info"><h4>Maria Fernandes</h4><p>Cascais — Criação de Jardim</p></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card gs-reveal">
+                        <div class="testimonial-stars">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        </div>
+                        <p class="testimonial-text">"Precisámos de limpeza urgente num terreno para cumprir a legislação de prevenção de incêndios. A equipa S.O.S Jardim respondeu rápido, fez o serviço impecável e dentro do prazo combinado."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">AS</div>
+                            <div class="testimonial-info"><h4>António Santos</h4><p>Sintra — Limpeza de Terreno</p></div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card gs-reveal">
+                        <div class="testimonial-stars">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        </div>
+                        <p class="testimonial-text">"O sistema de rega que instalaram funciona na perfeição. Já não preciso de me preocupar com a rega manual e as plantas estão visivelmente mais saudáveis. Muito satisfeita com o serviço."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">CR</div>
+                            <div class="testimonial-info"><h4>Carla Rodrigues</h4><p>Oeiras — Sistema de Rega</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROCESS -->
+        <section class="process" id="processo">
+            <div class="container">
+                <div class="section-header gs-reveal">
+                    <span class="section-label">Como Trabalhamos</span>
+                    <h2 class="section-title">Do contacto ao resultado final</h2>
+                    <p class="section-subtitle">Um processo simples e transparente, pensado para que saiba sempre o que esperar.</p>
+                </div>
+                <div class="process-steps stagger-children">
+                    <div class="process-step gs-reveal"><div class="process-step-number">01</div><h3>Contacto Inicial</h3><p>Envie-nos um e-mail, ligue ou preencha o formulário. Descreva o que precisa e agendamos uma visita ao local, sem qualquer custo.</p></div>
+                    <div class="process-step gs-reveal"><div class="process-step-number">02</div><h3>Visita e Diagnóstico</h3><p>Avaliamos o terreno presencialmente. Analisamos as condições do solo, a vegetação existente e identificamos as necessidades reais.</p></div>
+                    <div class="process-step gs-reveal"><div class="process-step-number">03</div><h3>Orçamento Detalhado</h3><p>Apresentamos uma proposta clara, com descrição dos serviços, prazos e valores. Sem surpresas e sem compromisso.</p></div>
+                    <div class="process-step gs-reveal"><div class="process-step-number">04</div><h3>Execução e Entrega</h3><p>Realizamos o trabalho com rigor técnico e limpeza do espaço. Entregamos o resultado combinado, no prazo acordado.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section class="contact" id="contacto">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <h2>Pronto para transformar o seu espaço exterior?</h2>
+                        <p>Peça já o seu orçamento gratuito e sem compromisso. Respondemos a todos os pedidos com a maior brevidade.</p>
+                        <div class="contact-details">
+                            <div class="contact-detail">
+                                <div class="contact-detail-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg></div>
+                                <div class="contact-detail-text"><small>Telefone / WhatsApp</small>+351 912 345 678</div>
+                            </div>
+                            <div class="contact-detail">
+                                <div class="contact-detail-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg></div>
+                                <div class="contact-detail-text"><small>E-mail</small>brilhodomarlimpezas@gmail.com</div>
+                            </div>
+                            <div class="contact-detail">
+                                <div class="contact-detail-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg></div>
+                                <div class="contact-detail-text"><small>Área de atuação</small>Portugal Continental</div>
+                            </div>
+                        </div>
+                        <div class="contact-sos"><p>Uma operação</p><strong>S.O.S Jardim by Brilho do Mar</strong></div>
+                    </div>
+                    <div class="contact-form">
+                        <h3>Pedir Orçamento</h3>
+                        <p>Preencha o formulário e entraremos em contacto consigo brevemente.</p>
+                        <form action="mailto:brilhodomarlimpezas@gmail.com" method="post" enctype="text/plain">
+                            <div class="form-row">
+                                <div class="form-group"><label for="name">Nome</label><input type="text" id="name" name="name" placeholder="O seu nome" required /></div>
+                                <div class="form-group"><label for="phone">Telefone</label><input type="tel" id="phone" name="phone" placeholder="+351" /></div>
+                            </div>
+                            <div class="form-group"><label for="email">E-mail</label><input type="email" id="email" name="email" placeholder="exemplo@email.com" required /></div>
+                            <div class="form-group">
+                                <label for="service">Serviço pretendido</label>
+                                <select id="service" name="service" required>
+                                    <option value="" disabled selected>Selecione um serviço</option>
+                                    <option value="criacao-jardins">Criação de Jardins</option>
+                                    <option value="sistemas-rega">Sistemas de Rega</option>
+                                    <option value="tratamento-pragas">Tratamento de Pragas e Doenças</option>
+                                    <option value="poda">Poda</option>
+                                    <option value="abate">Abate de Árvores</option>
+                                    <option value="limpeza-terrenos">Limpeza de Terrenos</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label for="message">Mensagem</label><textarea id="message" name="message" placeholder="Descreva o que precisa..." rows="4"></textarea></div>
+                            <div class="form-submit"><button type="submit" class="btn btn-primary btn-lg">Enviar Pedido de Orçamento</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div>
+                    <div class="footer-brand-name">Brilho do Mar</div>
+                    <div class="footer-brand-sub">S.O.S Jardim</div>
+                    <p class="footer-desc">Especialistas em jardinagem e manutenção de espaços exteriores em Portugal. Criação de jardins, sistemas de rega, poda, abate e limpeza de terrenos.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Serviços</h4>
+                    <ul>
+                        <li><a href="#servicos">Criação de Jardins</a></li>
+                        <li><a href="#servicos">Sistemas de Rega</a></li>
+                        <li><a href="#servicos">Tratamento de Pragas</a></li>
+                        <li><a href="#servicos">Poda</a></li>
+                        <li><a href="#servicos">Abate de Árvores</a></li>
+                        <li><a href="#servicos">Limpeza de Terrenos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#processo">Como Trabalhamos</a></li>
+                        <li><a href="#contacto">Pedir Orçamento</a></li>
+                        <li><a href="mailto:brilhodomarlimpezas@gmail.com">Contacto</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span class="footer-copy">&copy; 2025 Brilho do Mar. Todos os direitos reservados.</span>
+                <span class="footer-email"><a href="mailto:brilhodomarlimpezas@gmail.com">brilhodomarlimpezas@gmail.com</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Mobile CTA -->
+    <div class="floating-cta" id="floatingCta">
+        <a href="#contacto" class="btn btn-primary">Pedir Orçamento Gratuito</a>
+    </div>
+
+    <!-- JAVASCRIPT — GSAP + ScrollTrigger + Lenis -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        /* ============================================
+           LENIS — Smooth Scroll
+           ============================================ */
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smoothWheel: true,
+            wheelMultiplier: 0.9,
+            touchMultiplier: 1.5,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Connect Lenis to GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+
+        // Anchor links smooth scroll via Lenis
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) lenis.scrollTo(target, { offset: -80, duration: 1.4 });
+            });
+        });
+
+        /* ============================================
+           REGISTER GSAP PLUGINS
+           ============================================ */
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Default GSAP settings
+        gsap.defaults({ ease: 'power3.out', duration: 1 });
+
+        /* ============================================
+           NAVIGATION — scroll state
+           ============================================ */
+        const nav = document.getElementById('nav');
+        const floatingCta = document.getElementById('floatingCta');
+        gsap.set(floatingCta, { yPercent: 100 });
+
+        ScrollTrigger.create({
+            start: 60,
+            onUpdate: (self) => {
+                nav.classList.toggle('scrolled', self.scroll() > 60);
+            }
+        });
+
+        ScrollTrigger.create({
+            trigger: '.hero',
+            start: 'bottom 80%',
+            onEnter: () => gsap.to(floatingCta, { yPercent: 0, duration: 0.4, ease: 'power2.out' }),
+            onLeaveBack: () => gsap.to(floatingCta, { yPercent: 100, duration: 0.3, ease: 'power2.in' })
+        });
+
+        /* ============================================
+           HERO ANIMATIONS
+           ============================================ */
+        // Hero parallax background
+        gsap.to('.hero-bg img', {
+            yPercent: 20,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.hero',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 0.5,
+            }
+        });
+
+        // Hero entrance timeline
+        const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        heroTl
+            .from('.hero-badge', { y: 30, opacity: 0, duration: 0.8 })
+            .from('.hero h1', { y: 60, opacity: 0, duration: 1, ease: 'power4.out' }, '-=0.5')
+            .from('.hero-subtitle', { y: 40, opacity: 0, duration: 0.9 }, '-=0.6')
+            .from('.hero-actions .btn', { y: 30, opacity: 0, duration: 0.7, stagger: 0.15 }, '-=0.5')
+            .from('.hero-trust', { y: 20, opacity: 0, duration: 0.8 }, '-=0.3')
+            .from('.hero-trust-item', { y: 15, opacity: 0, duration: 0.5, stagger: 0.1 }, '-=0.5');
+
+        /* ============================================
+           GENERIC REVEAL — .gs-reveal elements
+           ============================================ */
+        const reveals = gsap.utils.toArray('.gs-reveal');
+        reveals.forEach((el) => {
+            // Determine if inside a stagger parent
+            const parent = el.closest('.stagger-children');
+            if (parent) return; // handled by stagger batch below
+
+            gsap.fromTo(el,
+                { autoAlpha: 0, y: 50 },
+                {
+                    autoAlpha: 1, y: 0, duration: 0.9,
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none',
+                    }
+                }
+            );
+        });
+
+        /* ============================================
+           STAGGER BATCHES — cards, steps, etc.
+           ============================================ */
+        document.querySelectorAll('.stagger-children').forEach((parent) => {
+            const children = gsap.utils.toArray(parent.querySelectorAll('.gs-reveal'));
+            if (!children.length) return;
+
+            gsap.fromTo(children,
+                { autoAlpha: 0, y: 60, scale: 0.97 },
+                {
+                    autoAlpha: 1, y: 0, scale: 1,
+                    duration: 0.8,
+                    stagger: 0.12,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: parent,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none',
+                    }
+                }
+            );
+        });
+
+        /* ============================================
+           SERVICE CARDS — image parallax on scroll
+           ============================================ */
+        gsap.utils.toArray('.service-card-img img').forEach((img) => {
+            gsap.fromTo(img,
+                { yPercent: -10, scale: 1.15 },
+                {
+                    yPercent: 10, scale: 1.15,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: img.closest('.service-card'),
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 0.4,
+                    }
+                }
+            );
+        });
+
+        /* ============================================
+           CTA BANNER — background gradient shift
+           ============================================ */
+        gsap.fromTo('.cta-banner',
+            { backgroundPosition: '0% 50%' },
+            {
+                backgroundPosition: '100% 50%',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.cta-banner',
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1,
+                }
+            }
+        );
+
+        /* ============================================
+           ABOUT — image parallax + reveal
+           ============================================ */
+        const aboutMainImg = document.querySelector('.about-img-main img');
+        if (aboutMainImg) {
+            gsap.fromTo(aboutMainImg,
+                { yPercent: -8, scale: 1.1 },
+                {
+                    yPercent: 8, scale: 1.1,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '.about',
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 0.5,
+                    }
+                }
+            );
+        }
+
+        // About accent image float
+        const aboutAccent = document.querySelector('.about-img-accent');
+        if (aboutAccent) {
+            gsap.fromTo(aboutAccent,
+                { y: 30, opacity: 0, scale: 0.9, rotation: -3 },
+                {
+                    y: 0, opacity: 1, scale: 1, rotation: 0,
+                    duration: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: '.about',
+                        start: 'top 60%',
+                        toggleActions: 'play none none none',
+                    }
+                }
+            );
+        }
+
+        // About stats — count up animation
+        gsap.utils.toArray('.about-stat-value').forEach((stat) => {
+            const text = stat.textContent.trim();
+            const isNumber = /^\d+/.test(text);
+            if (isNumber) {
+                const num = parseInt(text);
+                const suffix = text.replace(/^\d+/, '');
+                gsap.from(stat, {
+                    textContent: 0,
+                    duration: 1.5,
+                    ease: 'power2.out',
+                    snap: { textContent: 1 },
+                    scrollTrigger: {
+                        trigger: stat,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none',
+                    },
+                    onUpdate: function() {
+                        stat.textContent = Math.round(parseFloat(stat.textContent)) + suffix;
+                    }
+                });
+            }
+        });
+
+        /* ============================================
+           PORTFOLIO — images scale on scroll
+           ============================================ */
+        gsap.utils.toArray('.portfolio-item img').forEach((img) => {
+            gsap.fromTo(img,
+                { scale: 1.15 },
+                {
+                    scale: 1,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: img.closest('.portfolio-item'),
+                        start: 'top bottom',
+                        end: 'center center',
+                        scrub: 0.5,
+                    }
+                }
+            );
+        });
+
+        /* ============================================
+           TESTIMONIALS — slide in from sides
+           ============================================ */
+        gsap.utils.toArray('.testimonial-card').forEach((card, i) => {
+            const direction = i % 2 === 0 ? -40 : 40;
+            gsap.fromTo(card,
+                { autoAlpha: 0, x: direction, rotateY: direction > 0 ? 3 : -3 },
+                {
+                    autoAlpha: 1, x: 0, rotateY: 0,
+                    duration: 0.9,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none',
+                    }
+                }
+            );
+        });
+
+        /* ============================================
+           PROCESS STEPS — sequential reveal with number scale
+           ============================================ */
+        gsap.utils.toArray('.process-step').forEach((step, i) => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: step,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none',
+                }
+            });
+            tl.fromTo(step,
+                { autoAlpha: 0, y: 50, scale: 0.95 },
+                { autoAlpha: 1, y: 0, scale: 1, duration: 0.7, delay: i * 0.12 }
+            )
+            .fromTo(step.querySelector('.process-step-number'),
+                { scale: 0.5, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(2)' },
+                '-=0.3'
+            );
+        });
+
+        /* ============================================
+           CONTACT — wrapper reveal with scale
+           ============================================ */
+        gsap.fromTo('.contact-wrapper',
+            { autoAlpha: 0, y: 60, scale: 0.96 },
+            {
+                autoAlpha: 1, y: 0, scale: 1,
+                duration: 1,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '.contact',
+                    start: 'top bottom',
+                    end: 'top 50%',
+                    toggleActions: 'play none none none',
+                }
+            }
+        );
+
+        // Contact details stagger
+        gsap.fromTo('.contact-detail',
+            { autoAlpha: 0, x: -30 },
+            {
+                autoAlpha: 1, x: 0,
+                duration: 0.6,
+                stagger: 0.15,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: '.contact-details',
+                    start: 'top 80%',
+                    toggleActions: 'play none none none',
+                }
+            }
+        );
+
+        /* ============================================
+           FOOTER — fade up
+           ============================================ */
+        gsap.fromTo('.footer-top > *',
+            { autoAlpha: 0, y: 30 },
+            {
+                autoAlpha: 1, y: 0,
+                duration: 0.7,
+                stagger: 0.15,
+                scrollTrigger: {
+                    trigger: '.footer',
+                    start: 'top 90%',
+                    toggleActions: 'play none none none',
+                }
+            }
+        );
+
+        /* ============================================
+           SECTION HEADERS — text reveal
+           ============================================ */
+        gsap.utils.toArray('.section-title').forEach((title) => {
+            // Skip if inside a stagger parent that already handles it
+            if (title.closest('.gs-reveal')) return;
+            gsap.fromTo(title,
+                { autoAlpha: 0, y: 40, clipPath: 'inset(0 0 100% 0)' },
+                {
+                    autoAlpha: 1, y: 0, clipPath: 'inset(0 0 0% 0)',
+                    duration: 1,
+                    ease: 'power4.out',
+                    scrollTrigger: {
+                        trigger: title,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none',
+                    }
+                }
+            );
+        });
+
+        /* ============================================
+           MAGNETIC BUTTONS — cursor follow effect
+           ============================================ */
+        if (window.matchMedia('(pointer: fine)').matches) {
+            document.querySelectorAll('.btn-primary, .btn-whatsapp, .btn-white').forEach((btn) => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    gsap.to(btn, { x: x * 0.2, y: y * 0.2, duration: 0.3, ease: 'power2.out' });
+                });
+                btn.addEventListener('mouseleave', () => {
+                    gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
+                });
+            });
+        }
+
+        /* ============================================
+           MOBILE MENU
+           ============================================ */
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileToggle.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            mobileToggle.innerHTML = isOpen
+                ? '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="28" height="28"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>'
+                : '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="28" height="28"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>';
+            if (isOpen) lenis.stop(); else lenis.start();
+        });
+        window.closeMobileMenu = () => {
+            mobileMenu.classList.remove('open');
+            mobileToggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="28" height="28"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>';
+            lenis.start();
+        };
+
+    }); // end DOMContentLoaded
+    </script>
+</body>
+</html>
