@@ -446,6 +446,128 @@
             .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
         }
 
+        /* ============================================
+           PRELOADER
+           ============================================ */
+        .preloader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: var(--green-950);
+            display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1.5rem;
+        }
+        .preloader-brand { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 2rem; color: var(--white); letter-spacing: -0.02em; opacity: 0; }
+        .preloader-sub { font-size: 0.75rem; font-weight: 600; color: var(--green-500); letter-spacing: 0.12em; text-transform: uppercase; opacity: 0; }
+        .preloader-bar { width: 120px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; opacity: 0; }
+        .preloader-bar-fill { width: 0%; height: 100%; background: var(--green-500); border-radius: 10px; }
+
+        /* ============================================
+           CUSTOM CURSOR
+           ============================================ */
+        .cursor-dot {
+            position: fixed; top: 0; left: 0; z-index: 9998;
+            width: 8px; height: 8px; background: var(--green-600);
+            border-radius: 50%; pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background 0.2s;
+            mix-blend-mode: difference;
+        }
+        .cursor-ring {
+            position: fixed; top: 0; left: 0; z-index: 9997;
+            width: 40px; height: 40px;
+            border: 1.5px solid rgba(22,163,74,0.4);
+            border-radius: 50%; pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s, border-color 0.3s;
+        }
+        .cursor-dot.hovering { width: 50px; height: 50px; background: rgba(22,163,74,0.15); }
+        .cursor-ring.hovering { width: 60px; height: 60px; border-color: var(--green-500); }
+        @media (pointer: coarse) { .cursor-dot, .cursor-ring { display: none; } }
+
+        /* ============================================
+           SCROLL PROGRESS BAR
+           ============================================ */
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; z-index: 101;
+            width: 0%; height: 3px;
+            background: linear-gradient(90deg, var(--green-600), var(--green-500));
+            transition: none;
+        }
+
+        /* ============================================
+           WHATSAPP FLOATING BUTTON
+           ============================================ */
+        .whatsapp-float {
+            position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 95;
+            width: 60px; height: 60px;
+            background: #25D366; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+            transition: all 0.3s var(--ease-out);
+            opacity: 0; transform: scale(0.5) translateY(20px);
+        }
+        .whatsapp-float:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 10px 36px rgba(37,211,102,0.5); }
+        .whatsapp-float svg { width: 30px; height: 30px; fill: white; }
+        .whatsapp-float-pulse {
+            position: absolute; inset: -4px;
+            border-radius: 50%; border: 2px solid #25D366;
+            animation: waPulse 2s ease-out infinite;
+        }
+        @keyframes waPulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        @media (max-width: 768px) {
+            .whatsapp-float { bottom: 5.5rem; right: 1rem; width: 54px; height: 54px; }
+            .whatsapp-float svg { width: 26px; height: 26px; }
+        }
+
+        /* ============================================
+           LIGHTBOX
+           ============================================ */
+        .lightbox {
+            position: fixed; inset: 0; z-index: 10000;
+            background: rgba(5,46,22,0.92); backdrop-filter: blur(16px);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: all 0.4s var(--ease-out);
+            cursor: zoom-out;
+        }
+        .lightbox.active { opacity: 1; visibility: visible; }
+        .lightbox img {
+            max-width: 90vw; max-height: 85vh; border-radius: 1rem;
+            box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+            transform: scale(0.9); transition: transform 0.4s var(--ease-out);
+        }
+        .lightbox.active img { transform: scale(1); }
+        .lightbox-close {
+            position: absolute; top: 1.5rem; right: 1.5rem;
+            width: 48px; height: 48px; background: rgba(255,255,255,0.1);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; border: none; transition: background 0.2s;
+        }
+        .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+        .lightbox-close svg { width: 24px; height: 24px; color: white; }
+        .lightbox-caption {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            color: rgba(255,255,255,0.8); font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.9375rem; font-weight: 600;
+        }
+
+        /* ============================================
+           SERVICE CARD ICON MICRO-INTERACTION
+           ============================================ */
+        .service-card-icon svg { transition: transform 0.4s var(--ease-out); }
+        .service-card:hover .service-card-icon svg { transform: rotate(8deg) scale(1.15); }
+        .service-card:hover .service-card-icon { box-shadow: 0 6px 24px rgba(22,101,52,0.2); }
+
+        /* Diff card icon pulse on hover */
+        .diff-card:hover .diff-icon svg {
+            animation: iconPulse 0.5s ease-out;
+        }
+        @keyframes iconPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
         /* Floating CTA mobile */
         .floating-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 90; padding: 1rem var(--container-px); background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-top: 1px solid rgba(0,0,0,0.06); box-shadow: 0 -4px 20px rgba(0,0,0,0.06); }
         .floating-cta .btn { width: 100%; }
@@ -469,6 +591,20 @@
     </script>
 </head>
 <body>
+
+    <!-- PRELOADER -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-brand" id="preloaderBrand">Brilho do Mar</div>
+        <div class="preloader-sub" id="preloaderSub">S.O.S Jardim</div>
+        <div class="preloader-bar" id="preloaderBar"><div class="preloader-bar-fill" id="preloaderFill"></div></div>
+    </div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- SCROLL PROGRESS BAR -->
+    <div class="scroll-progress" id="scrollProgress"></div>
 
     <!-- NAVIGATION -->
     <header class="nav" id="nav">
@@ -821,28 +957,32 @@
                     </div>
                     <div class="contact-form">
                         <h3>Pedir Orçamento</h3>
-                        <p>Preencha o formulário e entraremos em contacto consigo brevemente.</p>
-                        <form action="mailto:brilhodomarlimpezas@gmail.com" method="post" enctype="text/plain">
+                        <p>Preencha os campos e envie diretamente para o nosso WhatsApp.</p>
+                        <form id="whatsappForm" onsubmit="return sendToWhatsApp(event)">
                             <div class="form-row">
-                                <div class="form-group"><label for="name">Nome</label><input type="text" id="name" name="name" placeholder="O seu nome" required /></div>
-                                <div class="form-group"><label for="phone">Telefone</label><input type="tel" id="phone" name="phone" placeholder="+351" /></div>
+                                <div class="form-group"><label for="wa_name">Nome</label><input type="text" id="wa_name" placeholder="O seu nome" required /></div>
+                                <div class="form-group"><label for="wa_phone">Telefone</label><input type="tel" id="wa_phone" placeholder="+351" /></div>
                             </div>
-                            <div class="form-group"><label for="email">E-mail</label><input type="email" id="email" name="email" placeholder="exemplo@email.com" required /></div>
                             <div class="form-group">
-                                <label for="service">Serviço pretendido</label>
-                                <select id="service" name="service" required>
+                                <label for="wa_service">Serviço pretendido</label>
+                                <select id="wa_service" required>
                                     <option value="" disabled selected>Selecione um serviço</option>
-                                    <option value="criacao-jardins">Criação de Jardins</option>
-                                    <option value="sistemas-rega">Sistemas de Rega</option>
-                                    <option value="tratamento-pragas">Tratamento de Pragas e Doenças</option>
-                                    <option value="poda">Poda</option>
-                                    <option value="abate">Abate de Árvores</option>
-                                    <option value="limpeza-terrenos">Limpeza de Terrenos</option>
-                                    <option value="outro">Outro</option>
+                                    <option value="Criação de Jardins">Criação de Jardins</option>
+                                    <option value="Sistemas de Rega">Sistemas de Rega</option>
+                                    <option value="Tratamento de Pragas e Doenças">Tratamento de Pragas e Doenças</option>
+                                    <option value="Poda">Poda</option>
+                                    <option value="Abate de Árvores">Abate de Árvores</option>
+                                    <option value="Limpeza de Terrenos">Limpeza de Terrenos</option>
+                                    <option value="Outro">Outro</option>
                                 </select>
                             </div>
-                            <div class="form-group"><label for="message">Mensagem</label><textarea id="message" name="message" placeholder="Descreva o que precisa..." rows="4"></textarea></div>
-                            <div class="form-submit"><button type="submit" class="btn btn-primary btn-lg">Enviar Pedido de Orçamento</button></div>
+                            <div class="form-group"><label for="wa_message">Mensagem</label><textarea id="wa_message" placeholder="Descreva o que precisa..." rows="4"></textarea></div>
+                            <div class="form-submit">
+                                <button type="submit" class="btn btn-whatsapp btn-lg" style="width:100%">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                                    Enviar pelo WhatsApp
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -892,9 +1032,57 @@
         <a href="#contacto" class="btn btn-primary">Pedir Orçamento Gratuito</a>
     </div>
 
-    <!-- JAVASCRIPT — GSAP + ScrollTrigger + Lenis -->
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/351912345678?text=Olá, gostaria de pedir um orçamento." class="whatsapp-float" id="whatsappFloat" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <span class="whatsapp-float-pulse"></span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button>
+        <img id="lightboxImg" src="" alt="" />
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <!-- JAVASCRIPT — GSAP + ScrollTrigger + Lenis + All Features -->
     <script>
+    /* WhatsApp form — global so form onsubmit can reach it */
+    function sendToWhatsApp(e) {
+        e.preventDefault();
+        const name = document.getElementById('wa_name').value.trim();
+        const phone = document.getElementById('wa_phone').value.trim();
+        const service = document.getElementById('wa_service').value;
+        const message = document.getElementById('wa_message').value.trim();
+        let text = `Olá! Gostaria de pedir um orçamento.\n\n`;
+        text += `*Nome:* ${name}\n`;
+        if (phone) text += `*Telefone:* ${phone}\n`;
+        text += `*Serviço:* ${service}\n`;
+        if (message) text += `*Mensagem:* ${message}\n`;
+        const encoded = encodeURIComponent(text);
+        window.open(`https://wa.me/351912345678?text=${encoded}`, '_blank');
+        return false;
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
+
+        /* ============================================
+           PRELOADER
+           ============================================ */
+        const preloader = document.getElementById('preloader');
+        const preloaderTl = gsap.timeline({
+            onComplete: () => {
+                gsap.to(preloader, {
+                    autoAlpha: 0, duration: 0.6, ease: 'power2.inOut',
+                    onComplete: () => { preloader.style.display = 'none'; initAllAnimations(); }
+                });
+            }
+        });
+        preloaderTl
+            .to('#preloaderBrand', { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0.2)
+            .to('#preloaderSub', { opacity: 1, duration: 0.4 }, 0.5)
+            .to('#preloaderBar', { opacity: 1, duration: 0.3 }, 0.7)
+            .to('#preloaderFill', { width: '100%', duration: 1.2, ease: 'power2.inOut' }, 0.8);
 
         /* ============================================
            LENIS — Smooth Scroll
@@ -907,18 +1095,14 @@
             touchMultiplier: 1.5,
         });
 
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-        }
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
         requestAnimationFrame(raf);
 
-        // Connect Lenis to GSAP ScrollTrigger
         lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.add((time) => lenis.raf(time * 1000));
         gsap.ticker.lagSmoothing(0);
 
-        // Anchor links smooth scroll via Lenis
+        // Anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -928,351 +1112,287 @@
         });
 
         /* ============================================
-           REGISTER GSAP PLUGINS
+           REGISTER PLUGINS
            ============================================ */
         gsap.registerPlugin(ScrollTrigger);
-
-        // Default GSAP settings
         gsap.defaults({ ease: 'power3.out', duration: 1 });
 
         /* ============================================
-           NAVIGATION — scroll state
-           ============================================ */
-        const nav = document.getElementById('nav');
-        const floatingCta = document.getElementById('floatingCta');
-        gsap.set(floatingCta, { yPercent: 100 });
-
-        ScrollTrigger.create({
-            start: 60,
-            onUpdate: (self) => {
-                nav.classList.toggle('scrolled', self.scroll() > 60);
-            }
-        });
-
-        ScrollTrigger.create({
-            trigger: '.hero',
-            start: 'bottom 80%',
-            onEnter: () => gsap.to(floatingCta, { yPercent: 0, duration: 0.4, ease: 'power2.out' }),
-            onLeaveBack: () => gsap.to(floatingCta, { yPercent: 100, duration: 0.3, ease: 'power2.in' })
-        });
-
-        /* ============================================
-           HERO ANIMATIONS
-           ============================================ */
-        // Hero parallax background
-        gsap.to('.hero-bg img', {
-            yPercent: 20,
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '.hero',
-                start: 'top top',
-                end: 'bottom top',
-                scrub: 0.5,
-            }
-        });
-
-        // Hero entrance timeline
-        const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-        heroTl
-            .from('.hero-badge', { y: 30, opacity: 0, duration: 0.8 })
-            .from('.hero h1', { y: 60, opacity: 0, duration: 1, ease: 'power4.out' }, '-=0.5')
-            .from('.hero-subtitle', { y: 40, opacity: 0, duration: 0.9 }, '-=0.6')
-            .from('.hero-actions .btn', { y: 30, opacity: 0, duration: 0.7, stagger: 0.15 }, '-=0.5')
-            .from('.hero-trust', { y: 20, opacity: 0, duration: 0.8 }, '-=0.3')
-            .from('.hero-trust-item', { y: 15, opacity: 0, duration: 0.5, stagger: 0.1 }, '-=0.5');
-
-        /* ============================================
-           GENERIC REVEAL — .gs-reveal elements
-           ============================================ */
-        const reveals = gsap.utils.toArray('.gs-reveal');
-        reveals.forEach((el) => {
-            // Determine if inside a stagger parent
-            const parent = el.closest('.stagger-children');
-            if (parent) return; // handled by stagger batch below
-
-            gsap.fromTo(el,
-                { autoAlpha: 0, y: 50 },
-                {
-                    autoAlpha: 1, y: 0, duration: 0.9,
-                    scrollTrigger: {
-                        trigger: el,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none',
-                    }
-                }
-            );
-        });
-
-        /* ============================================
-           STAGGER BATCHES — cards, steps, etc.
-           ============================================ */
-        document.querySelectorAll('.stagger-children').forEach((parent) => {
-            const children = gsap.utils.toArray(parent.querySelectorAll('.gs-reveal'));
-            if (!children.length) return;
-
-            gsap.fromTo(children,
-                { autoAlpha: 0, y: 60, scale: 0.97 },
-                {
-                    autoAlpha: 1, y: 0, scale: 1,
-                    duration: 0.8,
-                    stagger: 0.12,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: parent,
-                        start: 'top 80%',
-                        toggleActions: 'play none none none',
-                    }
-                }
-            );
-        });
-
-        /* ============================================
-           SERVICE CARDS — image parallax on scroll
-           ============================================ */
-        gsap.utils.toArray('.service-card-img img').forEach((img) => {
-            gsap.fromTo(img,
-                { yPercent: -10, scale: 1.15 },
-                {
-                    yPercent: 10, scale: 1.15,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: img.closest('.service-card'),
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: 0.4,
-                    }
-                }
-            );
-        });
-
-        /* ============================================
-           CTA BANNER — background gradient shift
-           ============================================ */
-        gsap.fromTo('.cta-banner',
-            { backgroundPosition: '0% 50%' },
-            {
-                backgroundPosition: '100% 50%',
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: '.cta-banner',
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: 1,
-                }
-            }
-        );
-
-        /* ============================================
-           ABOUT — image parallax + reveal
-           ============================================ */
-        const aboutMainImg = document.querySelector('.about-img-main img');
-        if (aboutMainImg) {
-            gsap.fromTo(aboutMainImg,
-                { yPercent: -8, scale: 1.1 },
-                {
-                    yPercent: 8, scale: 1.1,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: '.about',
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: 0.5,
-                    }
-                }
-            );
-        }
-
-        // About accent image float
-        const aboutAccent = document.querySelector('.about-img-accent');
-        if (aboutAccent) {
-            gsap.fromTo(aboutAccent,
-                { y: 30, opacity: 0, scale: 0.9, rotation: -3 },
-                {
-                    y: 0, opacity: 1, scale: 1, rotation: 0,
-                    duration: 1,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: '.about',
-                        start: 'top 60%',
-                        toggleActions: 'play none none none',
-                    }
-                }
-            );
-        }
-
-        // About stats — count up animation
-        gsap.utils.toArray('.about-stat-value').forEach((stat) => {
-            const text = stat.textContent.trim();
-            const isNumber = /^\d+/.test(text);
-            if (isNumber) {
-                const num = parseInt(text);
-                const suffix = text.replace(/^\d+/, '');
-                gsap.from(stat, {
-                    textContent: 0,
-                    duration: 1.5,
-                    ease: 'power2.out',
-                    snap: { textContent: 1 },
-                    scrollTrigger: {
-                        trigger: stat,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none',
-                    },
-                    onUpdate: function() {
-                        stat.textContent = Math.round(parseFloat(stat.textContent)) + suffix;
-                    }
-                });
-            }
-        });
-
-        /* ============================================
-           PORTFOLIO — images scale on scroll
-           ============================================ */
-        gsap.utils.toArray('.portfolio-item img').forEach((img) => {
-            gsap.fromTo(img,
-                { scale: 1.15 },
-                {
-                    scale: 1,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: img.closest('.portfolio-item'),
-                        start: 'top bottom',
-                        end: 'center center',
-                        scrub: 0.5,
-                    }
-                }
-            );
-        });
-
-        /* ============================================
-           TESTIMONIALS — slide in from sides
-           ============================================ */
-        gsap.utils.toArray('.testimonial-card').forEach((card, i) => {
-            const direction = i % 2 === 0 ? -40 : 40;
-            gsap.fromTo(card,
-                { autoAlpha: 0, x: direction, rotateY: direction > 0 ? 3 : -3 },
-                {
-                    autoAlpha: 1, x: 0, rotateY: 0,
-                    duration: 0.9,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none',
-                    }
-                }
-            );
-        });
-
-        /* ============================================
-           PROCESS STEPS — sequential reveal with number scale
-           ============================================ */
-        gsap.utils.toArray('.process-step').forEach((step, i) => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: step,
-                    start: 'top 85%',
-                    toggleActions: 'play none none none',
-                }
-            });
-            tl.fromTo(step,
-                { autoAlpha: 0, y: 50, scale: 0.95 },
-                { autoAlpha: 1, y: 0, scale: 1, duration: 0.7, delay: i * 0.12 }
-            )
-            .fromTo(step.querySelector('.process-step-number'),
-                { scale: 0.5, opacity: 0 },
-                { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(2)' },
-                '-=0.3'
-            );
-        });
-
-        /* ============================================
-           CONTACT — wrapper reveal with scale
-           ============================================ */
-        gsap.fromTo('.contact-wrapper',
-            { autoAlpha: 0, y: 60, scale: 0.96 },
-            {
-                autoAlpha: 1, y: 0, scale: 1,
-                duration: 1,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '.contact',
-                    start: 'top bottom',
-                    end: 'top 50%',
-                    toggleActions: 'play none none none',
-                }
-            }
-        );
-
-        // Contact details stagger
-        gsap.fromTo('.contact-detail',
-            { autoAlpha: 0, x: -30 },
-            {
-                autoAlpha: 1, x: 0,
-                duration: 0.6,
-                stagger: 0.15,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: '.contact-details',
-                    start: 'top 80%',
-                    toggleActions: 'play none none none',
-                }
-            }
-        );
-
-        /* ============================================
-           FOOTER — fade up
-           ============================================ */
-        gsap.fromTo('.footer-top > *',
-            { autoAlpha: 0, y: 30 },
-            {
-                autoAlpha: 1, y: 0,
-                duration: 0.7,
-                stagger: 0.15,
-                scrollTrigger: {
-                    trigger: '.footer',
-                    start: 'top 90%',
-                    toggleActions: 'play none none none',
-                }
-            }
-        );
-
-        /* ============================================
-           SECTION HEADERS — text reveal
-           ============================================ */
-        gsap.utils.toArray('.section-title').forEach((title) => {
-            // Skip if inside a stagger parent that already handles it
-            if (title.closest('.gs-reveal')) return;
-            gsap.fromTo(title,
-                { autoAlpha: 0, y: 40, clipPath: 'inset(0 0 100% 0)' },
-                {
-                    autoAlpha: 1, y: 0, clipPath: 'inset(0 0 0% 0)',
-                    duration: 1,
-                    ease: 'power4.out',
-                    scrollTrigger: {
-                        trigger: title,
-                        start: 'top 85%',
-                        toggleActions: 'play none none none',
-                    }
-                }
-            );
-        });
-
-        /* ============================================
-           MAGNETIC BUTTONS — cursor follow effect
+           CUSTOM CURSOR (desktop only)
            ============================================ */
         if (window.matchMedia('(pointer: fine)').matches) {
-            document.querySelectorAll('.btn-primary, .btn-whatsapp, .btn-white').forEach((btn) => {
-                btn.addEventListener('mousemove', (e) => {
-                    const rect = btn.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    gsap.to(btn, { x: x * 0.2, y: y * 0.2, duration: 0.3, ease: 'power2.out' });
-                });
-                btn.addEventListener('mouseleave', () => {
-                    gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
-                });
+            const dot = document.getElementById('cursorDot');
+            const ring = document.getElementById('cursorRing');
+            let mouseX = 0, mouseY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX; mouseY = e.clientY;
+                gsap.to(dot, { x: mouseX, y: mouseY, duration: 0.1, ease: 'power2.out' });
+                gsap.to(ring, { x: mouseX, y: mouseY, duration: 0.25, ease: 'power2.out' });
             });
+
+            // Hover state on interactive elements
+            const hoverTargets = 'a, button, .service-card, .portfolio-item, .diff-card, .testimonial-card, input, select, textarea';
+            document.querySelectorAll(hoverTargets).forEach(el => {
+                el.addEventListener('mouseenter', () => { dot.classList.add('hovering'); ring.classList.add('hovering'); });
+                el.addEventListener('mouseleave', () => { dot.classList.remove('hovering'); ring.classList.remove('hovering'); });
+            });
+
+            // Hide default cursor
+            document.body.style.cursor = 'none';
+            document.querySelectorAll('a, button').forEach(el => el.style.cursor = 'none');
+        } else {
+            // Remove cursor elements on touch
+            document.getElementById('cursorDot')?.remove();
+            document.getElementById('cursorRing')?.remove();
         }
+
+        /* ============================================
+           SCROLL PROGRESS BAR
+           ============================================ */
+        const progressBar = document.getElementById('scrollProgress');
+        ScrollTrigger.create({
+            trigger: document.body,
+            start: 'top top',
+            end: 'bottom bottom',
+            onUpdate: (self) => {
+                gsap.set(progressBar, { width: (self.progress * 100) + '%' });
+            }
+        });
+
+        /* ============================================
+           WHATSAPP FLOATING BUTTON — appear after hero
+           ============================================ */
+        const waFloat = document.getElementById('whatsappFloat');
+        ScrollTrigger.create({
+            trigger: '.hero',
+            start: 'bottom 70%',
+            onEnter: () => gsap.to(waFloat, { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: 'back.out(2)' }),
+            onLeaveBack: () => gsap.to(waFloat, { opacity: 0, scale: 0.5, y: 20, duration: 0.3 })
+        });
+
+        /* ============================================
+           LIGHTBOX
+           ============================================ */
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                const caption = item.querySelector('.portfolio-item-overlay span');
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightboxCaption.textContent = caption ? caption.textContent : '';
+                lightbox.classList.add('active');
+                lenis.stop();
+            });
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            lenis.start();
+        }
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox(); });
+
+        /* ============================================
+           ALL GSAP ANIMATIONS — called after preloader
+           ============================================ */
+        function initAllAnimations() {
+
+            /* NAV + FLOATING CTA */
+            const nav = document.getElementById('nav');
+            const floatingCta = document.getElementById('floatingCta');
+            gsap.set(floatingCta, { yPercent: 100 });
+
+            ScrollTrigger.create({
+                start: 60,
+                onUpdate: (self) => nav.classList.toggle('scrolled', self.scroll() > 60)
+            });
+            ScrollTrigger.create({
+                trigger: '.hero', start: 'bottom 80%',
+                onEnter: () => gsap.to(floatingCta, { yPercent: 0, duration: 0.4, ease: 'power2.out' }),
+                onLeaveBack: () => gsap.to(floatingCta, { yPercent: 100, duration: 0.3, ease: 'power2.in' })
+            });
+
+            /* HERO — parallax */
+            gsap.to('.hero-bg img', {
+                yPercent: 20, ease: 'none',
+                scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.5 }
+            });
+
+            /* HERO — entrance (delay 0 = starts right after preloader) */
+            const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.1 });
+            heroTl
+                .fromTo('.hero-badge', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 })
+                .fromTo('.hero h1', { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power4.out' }, '-=0.5')
+                .from('.hero-subtitle', { y: 40, opacity: 0, duration: 0.9 }, '-=0.6')
+                .from('.hero-actions .btn', { y: 30, opacity: 0, duration: 0.7, stagger: 0.15 }, '-=0.5')
+                .from('.hero-trust', { y: 20, opacity: 0, duration: 0.8 }, '-=0.3')
+                .from('.hero-trust-item', { y: 15, opacity: 0, duration: 0.5, stagger: 0.1 }, '-=0.5');
+
+            /* SPLIT TEXT — section titles word-by-word reveal */
+            gsap.utils.toArray('.section-title').forEach((title) => {
+                if (title.closest('.gs-reveal')) return;
+                const words = title.textContent.split(' ');
+                title.innerHTML = words.map(w => `<span class="split-line"><span class="split-line-inner">${w}</span></span>`).join(' ');
+                const inners = title.querySelectorAll('.split-line-inner');
+                gsap.fromTo(inners,
+                    { yPercent: 110, opacity: 0 },
+                    {
+                        yPercent: 0, opacity: 1, duration: 0.7, stagger: 0.05, ease: 'power4.out',
+                        scrollTrigger: { trigger: title, start: 'top 85%', toggleActions: 'play none none none' }
+                    }
+                );
+            });
+
+            /* SECTION LABELS — fade */
+            gsap.utils.toArray('.section-label').forEach(label => {
+                if (label.closest('.gs-reveal')) return;
+                gsap.fromTo(label,
+                    { autoAlpha: 0, y: 15 },
+                    { autoAlpha: 1, y: 0, duration: 0.6, scrollTrigger: { trigger: label, start: 'top 88%', toggleActions: 'play none none none' } }
+                );
+            });
+
+            /* GENERIC REVEAL */
+            gsap.utils.toArray('.gs-reveal').forEach((el) => {
+                if (el.closest('.stagger-children')) return;
+                gsap.fromTo(el, { autoAlpha: 0, y: 50 },
+                    { autoAlpha: 1, y: 0, duration: 0.9, scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' } }
+                );
+            });
+
+            /* STAGGER BATCHES */
+            document.querySelectorAll('.stagger-children').forEach((parent) => {
+                const children = gsap.utils.toArray(parent.querySelectorAll('.gs-reveal'));
+                if (!children.length) return;
+                gsap.fromTo(children,
+                    { autoAlpha: 0, y: 60, scale: 0.97 },
+                    { autoAlpha: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.12, ease: 'power3.out',
+                      scrollTrigger: { trigger: parent, start: 'top 80%', toggleActions: 'play none none none' } }
+                );
+            });
+
+            /* SERVICE CARDS — image parallax */
+            gsap.utils.toArray('.service-card-img img').forEach((img) => {
+                gsap.fromTo(img,
+                    { yPercent: -10, scale: 1.15 },
+                    { yPercent: 10, scale: 1.15, ease: 'none',
+                      scrollTrigger: { trigger: img.closest('.service-card'), start: 'top bottom', end: 'bottom top', scrub: 0.4 } }
+                );
+            });
+
+            /* CTA BANNER */
+            gsap.fromTo('.cta-banner',
+                { backgroundPosition: '0% 50%' },
+                { backgroundPosition: '100% 50%', ease: 'none',
+                  scrollTrigger: { trigger: '.cta-banner', start: 'top bottom', end: 'bottom top', scrub: 1 } }
+            );
+
+            /* ABOUT — image parallax */
+            const aboutImg = document.querySelector('.about-img-main img');
+            if (aboutImg) {
+                gsap.fromTo(aboutImg,
+                    { yPercent: -8, scale: 1.1 },
+                    { yPercent: 8, scale: 1.1, ease: 'none',
+                      scrollTrigger: { trigger: '.about', start: 'top bottom', end: 'bottom top', scrub: 0.5 } }
+                );
+            }
+
+            /* ABOUT — accent image */
+            const aboutAccent = document.querySelector('.about-img-accent');
+            if (aboutAccent) {
+                gsap.fromTo(aboutAccent,
+                    { y: 30, opacity: 0, scale: 0.9, rotation: -3 },
+                    { y: 0, opacity: 1, scale: 1, rotation: 0, duration: 1, ease: 'power3.out',
+                      scrollTrigger: { trigger: '.about', start: 'top 60%', toggleActions: 'play none none none' } }
+                );
+            }
+
+            /* ABOUT — stats count up */
+            gsap.utils.toArray('.about-stat-value').forEach((stat) => {
+                const text = stat.textContent.trim();
+                if (/^\d+/.test(text)) {
+                    const suffix = text.replace(/^\d+/, '');
+                    gsap.from(stat, {
+                        textContent: 0, duration: 1.5, ease: 'power2.out', snap: { textContent: 1 },
+                        scrollTrigger: { trigger: stat, start: 'top 85%', toggleActions: 'play none none none' },
+                        onUpdate() { stat.textContent = Math.round(parseFloat(stat.textContent)) + suffix; }
+                    });
+                }
+            });
+
+            /* PORTFOLIO — images scale on scroll */
+            gsap.utils.toArray('.portfolio-item img').forEach((img) => {
+                gsap.fromTo(img, { scale: 1.15 },
+                    { scale: 1, ease: 'none',
+                      scrollTrigger: { trigger: img.closest('.portfolio-item'), start: 'top bottom', end: 'center center', scrub: 0.5 } }
+                );
+            });
+
+            /* TESTIMONIALS — slide in from sides */
+            gsap.utils.toArray('.testimonial-card').forEach((card, i) => {
+                const dir = i % 2 === 0 ? -40 : 40;
+                gsap.fromTo(card,
+                    { autoAlpha: 0, x: dir, rotateY: dir > 0 ? 3 : -3 },
+                    { autoAlpha: 1, x: 0, rotateY: 0, duration: 0.9, ease: 'power3.out',
+                      scrollTrigger: { trigger: card, start: 'top 85%', toggleActions: 'play none none none' } }
+                );
+            });
+
+            /* PROCESS STEPS — sequential + number scale */
+            gsap.utils.toArray('.process-step').forEach((step, i) => {
+                const tl = gsap.timeline({
+                    scrollTrigger: { trigger: step, start: 'top 85%', toggleActions: 'play none none none' }
+                });
+                tl.fromTo(step, { autoAlpha: 0, y: 50, scale: 0.95 },
+                    { autoAlpha: 1, y: 0, scale: 1, duration: 0.7, delay: i * 0.12 })
+                  .fromTo(step.querySelector('.process-step-number'),
+                    { scale: 0.5, opacity: 0 },
+                    { scale: 1, opacity: 1, duration: 0.6, ease: 'back.out(2)' }, '-=0.3');
+            });
+
+            /* CONTACT — reveal */
+            gsap.fromTo('.contact-wrapper',
+                { autoAlpha: 0, y: 60, scale: 0.96 },
+                { autoAlpha: 1, y: 0, scale: 1, duration: 1, ease: 'power3.out',
+                  scrollTrigger: { trigger: '.contact', start: 'top bottom', toggleActions: 'play none none none' } }
+            );
+            gsap.fromTo('.contact-detail',
+                { autoAlpha: 0, x: -30 },
+                { autoAlpha: 1, x: 0, duration: 0.6, stagger: 0.15, ease: 'power3.out',
+                  scrollTrigger: { trigger: '.contact-details', start: 'top 80%', toggleActions: 'play none none none' } }
+            );
+
+            /* FOOTER */
+            gsap.fromTo('.footer-top > *',
+                { autoAlpha: 0, y: 30 },
+                { autoAlpha: 1, y: 0, duration: 0.7, stagger: 0.15,
+                  scrollTrigger: { trigger: '.footer', start: 'top 90%', toggleActions: 'play none none none' } }
+            );
+
+            /* MAGNETIC BUTTONS */
+            if (window.matchMedia('(pointer: fine)').matches) {
+                document.querySelectorAll('.btn-primary, .btn-whatsapp, .btn-white').forEach((btn) => {
+                    btn.addEventListener('mousemove', (e) => {
+                        const rect = btn.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        gsap.to(btn, { x: x * 0.2, y: y * 0.2, duration: 0.3, ease: 'power2.out' });
+                    });
+                    btn.addEventListener('mouseleave', () => {
+                        gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.5)' });
+                    });
+                });
+            }
+
+            ScrollTrigger.refresh();
+
+        } // end initAllAnimations
 
         /* ============================================
            MOBILE MENU
